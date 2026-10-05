@@ -1,0 +1,13 @@
+Order ID,Order Date,Customer,SKU,Product,Variant,Qty,Priority,Status,Ship By,Courier,Risk
+ORD-1042,04-Oct-2026 10:05,Rahul Sharma,SKU-103,Running Shoes,Black / 9,1,Priority,Picking,04-Oct-2026 16:00,Delhivery,High
+ORD-1043,04-Oct-2026 10:14,Priya Kulkarni,SKU-101,Classic Cotton T-Shirt,Black / M,2,Normal,Packing,04-Oct-2026 18:00,BlueDart,Normal
+ORD-1044,04-Oct-2026 10:22,Amit Patil,SKU-107,Travel Backpack,Black / 28L,1,Normal,Staged,04-Oct-2026 17:30,Delhivery,Normal
+ORD-1045,04-Oct-2026 10:31,Sneha Joshi,SKU-104,Running Shoes,Blue / 8,1,Priority,Inventory Hold,04-Oct-2026 15:30,Delhivery,High
+ORD-1046,04-Oct-2026 10:42,Vikas Rao,SKU-105,Everyday Hoodie,Grey / L,1,Normal,Ready to Pick,04-Oct-2026 19:00,Ecom Express,Normal
+ORD-1047,04-Oct-2026 10:53,Neha Deshmukh,SKU-109,Slim Fit Jeans,Blue / 32,1,Normal,Processing,04-Oct-2026 19:30,BlueDart,Normal
+ORD-1048,04-Oct-2026 11:04,Karan Shah,SKU-108,Sports Cap,Blue / Free,3,Normal,Shipped,04-Oct-2026 14:30,Delhivery,Normal
+ORD-1049,04-Oct-2026 11:15,Pooja Mehta,SKU-110,Casual Sneakers,White / 9,1,Priority,Packing,04-Oct-2026 16:30,BlueDart,High
+ORD-1050,04-Oct-2026 11:25,Arjun Nair,SKU-102,Classic Cotton T-Shirt,White / L,1,Normal,Ready to Pick,04-Oct-2026 20:00,Ecom Express,Normal
+ORD-1051,04-Oct-2026 11:38,Riya Singh,SKU-106,Everyday Hoodie,Navy / M,1,Priority,Picking,04-Oct-2026 17:00,Delhivery,High
+ORD-1052,04-Oct-2026 11:51,Mohit Verma,SKU-101,Classic Cotton T-Shirt,Black / M,1,Normal,Shipped,04-Oct-2026 15:00,BlueDart,Normal
+ORD-1053,04-Oct-2026 12:02,Isha Gupta,SKU-107,Travel Backpack,Black / 28L,1,Normal,Staged,04-Oct-2026 18:00,Ecom Express,Normal

@@ -1,0 +1,21 @@
+SKU,Product,Warehouse,Location,Available Qty,Reserved Qty
+SKU-101,Classic Cotton T-Shirt,Main Warehouse,A-01-01,18,2
+SKU-101,Classic Cotton T-Shirt,Secondary Warehouse,S-01-02,12,0
+SKU-102,Classic Cotton T-Shirt,Main Warehouse,A-01-02,9,1
+SKU-102,Classic Cotton T-Shirt,Secondary Warehouse,S-01-03,10,0
+SKU-103,Running Shoes,Main Warehouse,B-02-01,3,2
+SKU-103,Running Shoes,Secondary Warehouse,S-02-01,8,0
+SKU-104,Running Shoes,Main Warehouse,B-02-02,0,0
+SKU-104,Running Shoes,Secondary Warehouse,S-02-02,6,0
+SKU-105,Everyday Hoodie,Main Warehouse,A-03-01,7,1
+SKU-105,Everyday Hoodie,Secondary Warehouse,S-03-01,4,0
+SKU-106,Everyday Hoodie,Main Warehouse,A-03-02,2,0
+SKU-106,Everyday Hoodie,Secondary Warehouse,S-03-02,9,0
+SKU-107,Travel Backpack,Main Warehouse,C-01-01,11,2
+SKU-107,Travel Backpack,Secondary Warehouse,S-04-01,5,0
+SKU-108,Sports Cap,Main Warehouse,C-02-01,22,3
+SKU-108,Sports Cap,Secondary Warehouse,S-04-02,0,0
+SKU-109,Slim Fit Jeans,Main Warehouse,A-04-01,4,1
+SKU-109,Slim Fit Jeans,Secondary Warehouse,S-05-01,7,0
+SKU-110,Casual Sneakers,Main Warehouse,B-03-01,6,1
+SKU-110,Casual Sneakers,Secondary Warehouse,S-06-01,3,0

@@ -1,0 +1,6 @@
+Issue ID,Order ID,Issue,Priority,Owner,Status,Recommended Action
+ISS-201,ORD-1045,Stock unavailable in main warehouse,High,Warehouse,Open,Transfer SKU-104 from secondary warehouse before picking
+ISS-202,ORD-1051,Priority order approaching ship deadline,High,Operations,Open,Complete picking before 17:00
+ISS-203,ORD-1044,Packed box waiting in staging,Medium,Warehouse,Open,Confirm box BX-221 location and courier pickup
+ISS-204,ORD-1049,Variant verification required,High,Packing,Investigating,Verify White / 9 before label is attached
+ISS-205,ORD-1038,Courier missed previous pickup,High,Operations,Resolved,Pickup rebooked for 16:45

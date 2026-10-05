@@ -1,0 +1,5 @@
+Shipment ID,Order ID,Box,Courier,Staging Location,Pickup Time,Status
+SHP-501,ORD-1044,BX-221,Delhivery,ST-A03,04-Oct-2026 17:30,Ready for Pickup
+SHP-502,ORD-1053,BX-222,Ecom Express,ST-A04,04-Oct-2026 18:00,Ready for Pickup
+SHP-503,ORD-1043,BX-223,BlueDart,ST-B01,04-Oct-2026 18:00,Packed
+SHP-504,ORD-1049,BX-224,BlueDart,ST-B02,04-Oct-2026 16:30,Packed

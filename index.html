@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fulfillment Hub — XYZ Operations</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#6b7280;--line:#e5e7eb;--nav:#101827;--accent:#2563eb;--green:#15803d;--amber:#b45309;--red:#b91c1c;--purple:#6d28d9}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.app{display:flex;min-height:100vh}.sidebar{width:230px;background:var(--nav);color:#fff;padding:22px 14px;position:fixed;top:0;bottom:0}
+.logo{font-size:20px;font-weight:800;padding:5px 10px 24px}.logo span{color:#60a5fa}.nav button{width:100%;background:none;border:0;color:#cbd5e1;text-align:left;padding:12px 13px;border-radius:8px;margin:3px 0;font-size:14px;cursor:pointer}.nav button.active,.nav button:hover{background:#1f2937;color:#fff}.nav small{display:block;color:#64748b;text-transform:uppercase;letter-spacing:.08em;padding:20px 13px 5px;font-size:10px}
+.main{margin-left:230px;width:calc(100% - 230px);padding:28px 34px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.title h1{font-size:25px;margin:0 0 5px}.title p{margin:0;color:var(--muted);font-size:13px}.date{background:#fff;border:1px solid var(--line);padding:9px 13px;border-radius:8px;font-size:12px}
+.page{display:none}.page.active{display:block}.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px}.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:17px}.card .label{color:var(--muted);font-size:12px}.card .num{font-size:26px;font-weight:750;margin:8px 0 3px}.sub{font-size:11px;color:var(--muted)}.danger{color:var(--red)}.warning{color:var(--amber)}.success{color:var(--green)}
+.grid2{display:grid;grid-template-columns:1.45fr 1fr;gap:18px}.panel{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:18px;overflow:hidden}.panelhead{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.panelhead h3{margin:0;font-size:14px}.panelhead span{font-size:11px;color:var(--muted)}.panelbody{padding:15px 17px}
+table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;color:var(--muted);font-weight:600;background:#f8fafc;padding:10px;border-bottom:1px solid var(--line)}td{padding:11px 10px;border-bottom:1px solid #f0f1f4;vertical-align:middle}tr:last-child td{border-bottom:0}.tag{display:inline-block;padding:4px 7px;border-radius:999px;font-size:10px;font-weight:700}.t-red{background:#fee2e2;color:#991b1b}.t-amber{background:#fef3c7;color:#92400e}.t-green{background:#dcfce7;color:#166534}.t-blue{background:#dbeafe;color:#1d4ed8}.t-purple{background:#ede9fe;color:#6d28d9}.t-gray{background:#f1f5f9;color:#475569}
+.btn{border:1px solid var(--line);background:#fff;padding:7px 10px;border-radius:7px;font-size:11px;cursor:pointer}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.btn:hover{filter:brightness(.97)}.btn + .btn{margin-left:5px}
+.alert{border:1px solid #fecaca;background:#fff7f7;padding:12px;border-radius:8px;margin-bottom:9px}.alert strong{font-size:12px}.alert p{font-size:11px;color:var(--muted);margin:5px 0 8px}.filters{display:flex;gap:8px;margin-bottom:14px}.filters input,.filters select{border:1px solid var(--line);border-radius:7px;padding:9px 10px;background:#fff;font-size:12px}.filters input{width:260px}
+.workflow{display:flex;align-items:center;gap:0;margin:8px 0 22px}.step{flex:1;text-align:center;position:relative}.circle{width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#e5e7eb;color:#64748b;font-size:11px;font-weight:700}.step.done .circle{background:#dcfce7;color:#166534}.step.current .circle{background:#dbeafe;color:#1d4ed8}.step:after{content:"";height:2px;background:#e5e7eb;position:absolute;top:14px;left:50%;right:-50%;z-index:0}.step:last-child:after{display:none}.circle{position:relative;z-index:1}.step label{display:block;font-size:9px;color:var(--muted);margin-top:5px}
+.detail{display:grid;grid-template-columns:1fr 1fr;gap:15px}.detailbox{border:1px solid var(--line);border-radius:8px;padding:13px}.detailbox h4{font-size:12px;margin:0 0 10px}.detailrow{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f0f1f4;font-size:11px}.detailrow:last-child{border:0}.empty{padding:35px;text-align:center;color:var(--muted);font-size:13px}
+.kpi{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f1f4}.kpi:last-child{border:0}.kpi b{font-size:13px}.bar{height:7px;background:#e5e7eb;border-radius:20px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:#2563eb}
+.toast{position:fixed;right:25px;bottom:25px;background:#111827;color:#fff;padding:12px 15px;border-radius:8px;font-size:12px;display:none;box-shadow:0 8px 25px #0002}.modal{display:none;position:fixed;inset:0;background:#0005;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalbox{background:#fff;border-radius:12px;width:min(720px,95vw);max-height:90vh;overflow:auto;padding:22px}.modalhead{display:flex;justify-content:space-between;align-items:center}.modalhead h2{margin:0;font-size:18px}.close{border:0;background:#f1f5f9;border-radius:50%;width:30px;height:30px;cursor:pointer}
+.note{background:#eff6ff;border:1px solid #bfdbfe;padding:12px;border-radius:8px;font-size:11px;color:#1e40af;margin-bottom:16px}
+@media(max-width:900px){.sidebar{width:70px}.logo{font-size:0}.logo span{font-size:18px}.nav button{font-size:0;text-align:center}.main{margin-left:70px;width:calc(100% - 70px);padding:20px}.cards{grid-template-columns:repeat(2,1fr)}.grid2,.detail{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="logo">Fulfillment <span>Hub</span></div>
+  <div class="nav">
+    <button class="active" onclick="showPage('dashboard',this)">▣ &nbsp; Dashboard</button>
+    <button onclick="showPage('orders',this)">▤ &nbsp; Orders</button>
+    <button onclick="showPage('inventory',this)">▦ &nbsp; Inventory</button>
+    <button onclick="showPage('fulfillment',this)">✓ &nbsp; Fulfillment</button>
+    <small>Operations</small>
+    <button onclick="showPage('issues',this)">⚠ &nbsp; Issues</button>
+    <button onclick="showPage('staging',this)">□ &nbsp; Staging & Pickup</button>
+  </div>
+</aside>
+
+<main class="main">
+<div class="top">
+  <div class="title"><h1 id="pageTitle">Operations Dashboard</h1><p>XYZ · Fulfillment control center</p></div>
+  <div class="date">04 October 2026 · Sunday</div>
+</div>
+
+<section id="dashboard" class="page active">
+  <div class="note"><b>Today's focus:</b> complete priority orders before their ship-by deadline and resolve inventory/staging exceptions before courier pickup.</div>
+  <div class="cards">
+    <div class="card"><div class="label">Orders Today</div><div class="num">246</div><div class="sub">+8% vs yesterday</div></div>
+    <div class="card"><div class="label">Priority Orders</div><div class="num">18</div><div class="sub">7 need attention</div></div>
+    <div class="card"><div class="label">At Risk</div><div class="num danger">11</div><div class="sub">Deadline approaching</div></div>
+    <div class="card"><div class="label">Open Issues</div><div class="num warning">4</div><div class="sub">2 high priority</div></div>
+    <div class="card"><div class="label">Ready for Pickup</div><div class="num success">46</div><div class="sub">Next pickup 16:30</div></div>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <div class="panelhead"><h3>Orders requiring attention</h3><span>Action queue</span></div>
+      <div class="panelbody">
+        <div class="alert"><strong>🔴 ORD-1045 · Priority</strong><p>SKU-104 has 0 units in the main warehouse. 6 units are available in the secondary warehouse.</p><button class="btn primary" onclick="openOrder('ORD-1045')">Resolve</button></div>
+        <div class="alert"><strong>🔴 ORD-1051 · Priority</strong><p>Picking is still in progress. Ship-by deadline: 17:00.</p><button class="btn primary" onclick="openOrder('ORD-1051')">Open Order</button></div>
+        <div class="alert"><strong>🟠 ORD-1044 · Staged</strong><p>Box BX-221 is ready but awaiting courier pickup at ST-A03.</p><button class="btn" onclick="showPage('staging',document.querySelectorAll('.nav button')[5])">Check Staging</button></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panelhead"><h3>Fulfillment progress</h3><span>Today's 246 orders</span></div>
+      <div class="panelbody">
+        <div class="kpi"><span>Received</span><b>246</b></div>
+        <div class="kpi"><span>Processed</span><b>214</b></div>
+        <div class="kpi"><span>Ready to Pick</span><b>57</b></div>
+        <div class="kpi"><span>Picking / Packing</span><b>69</b></div>
+        <div class="kpi"><span>Staged</span><b>46</b></div>
+        <div class="kpi"><span>Shipped</span><b>32</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="orders" class="page">
+  <div class="filters"><input id="orderSearch" placeholder="Search order, customer or SKU..." oninput="renderOrders()"><select id="statusFilter" onchange="renderOrders()"><option value="">All statuses</option><option>Processing</option><option>Inventory Hold</option><option>Ready to Pick</option><option>Picking</option><option>Packing</option><option>Staged</option><option>Shipped</option></select><select id="priorityFilter" onchange="renderOrders()"><option value="">All priority</option><option>Priority</option><option>Normal</option></select></div>
+  <div class="panel"><div class="panelhead"><h3>Order queue</h3><span id="orderCount"></span></div><div class="panelbody"><table><thead><tr><th>Order</th><th>Customer</th><th>Item</th><th>Priority</th><th>Status</th><th>Ship by</th><th>Risk</th><th></th></tr></thead><tbody id="ordersBody"></tbody></table></div></div>
+</section>
+
+<section id="inventory" class="page">
+  <div class="note"><b>Inventory rule:</b> orders can ship only from the Main Warehouse. When main stock is insufficient, the application flags the order for transfer from the Secondary Warehouse.</div>
+  <div class="panel"><div class="panelhead"><h3>Inventory visibility</h3><span>Main + Secondary warehouse</span></div><div class="panelbody"><table><thead><tr><th>SKU</th><th>Product</th><th>Main WH</th><th>Secondary WH</th><th>Total</th><th>Operational status</th><th></th></tr></thead><tbody id="inventoryBody"></tbody></table></div></div>
+</section>
+
+<section id="fulfillment" class="page">
+  <div class="panel"><div class="panelhead"><h3>Fulfillment workflow</h3><span>Select an order to demonstrate the handoff</span></div><div class="panelbody" id="fulfillmentBody"></div></div>
+</section>
+
+<section id="issues" class="page">
+  <div class="panel"><div class="panelhead"><h3>Exception tracker</h3><span>Problems are assigned and tracked to resolution</span></div><div class="panelbody"><table><thead><tr><th>Issue</th><th>Order</th><th>Problem</th><th>Priority</th><th>Owner</th><th>Status</th><th>Action</th></tr></thead><tbody id="issuesBody"></tbody></table></div></div>
+</section>
+
+<section id="staging" class="page">
+  <div class="panel"><div class="panelhead"><h3>Staging & courier pickup</h3><span>Know where every packed box is</span></div><div class="panelbody"><table><thead><tr><th>Order</th><th>Box</th><th>Courier</th><th>Staging location</th><th>Pickup</th><th>Status</th><th></th></tr></thead><tbody id="stagingBody"></tbody></table></div></div>
+</section>
+</main>
+</div>
+
+<div id="modal" class="modal" onclick="if(event.target===this)closeModal()"><div class="modalbox"><div class="modalhead"><h2 id="modalTitle"></h2><button class="close" onclick="closeModal()">×</button></div><div id="modalContent" style="margin-top:18px"></div></div></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const orders = [
+{id:"ORD-1042",customer:"Rahul Sharma",sku:"SKU-103",product:"Running Shoes",variant:"Black / 9",qty:1,priority:"Priority",status:"Picking",ship:"16:00",courier:"Delhivery",risk:"High"},
+{id:"ORD-1043",customer:"Priya Kulkarni",sku:"SKU-101",product:"Classic Cotton T-Shirt",variant:"Black / M",qty:2,priority:"Normal",status:"Packing",ship:"18:00",courier:"BlueDart",risk:"Normal"},
+{id:"ORD-1044",customer:"Amit Patil",sku:"SKU-107",product:"Travel Backpack",variant:"Black / 28L",qty:1,priority:"Normal",status:"Staged",ship:"17:30",courier:"Delhivery",risk:"Normal"},
+{id:"ORD-1045",customer:"Sneha Joshi",sku:"SKU-104",product:"Running Shoes",variant:"Blue / 8",qty:1,priority:"Priority",status:"Inventory Hold",ship:"15:30",courier:"Delhivery",risk:"High"},
+{id:"ORD-1046",customer:"Vikas Rao",sku:"SKU-105",product:"Everyday Hoodie",variant:"Grey / L",qty:1,priority:"Normal",status:"Ready to Pick",ship:"19:00",courier:"Ecom Express",risk:"Normal"},
+{id:"ORD-1047",customer:"Neha Deshmukh",sku:"SKU-109",product:"Slim Fit Jeans",variant:"Blue / 32",qty:1,priority:"Normal",status:"Processing",ship:"19:30",courier:"BlueDart",risk:"Normal"},
+{id:"ORD-1048",customer:"Karan Shah",sku:"SKU-108",product:"Sports Cap",variant:"Blue / Free",qty:3,priority:"Normal",status:"Shipped",ship:"14:30",courier:"Delhivery",risk:"Normal"},
+{id:"ORD-1049",customer:"Pooja Mehta",sku:"SKU-110",product:"Casual Sneakers",variant:"White / 9",qty:1,priority:"Priority",status:"Packing",ship:"16:30",courier:"BlueDart",risk:"High"},
+{id:"ORD-1050",customer:"Arjun Nair",sku:"SKU-102",product:"Classic Cotton T-Shirt",variant:"White / L",qty:1,priority:"Normal",status:"Ready to Pick",ship:"20:00",courier:"Ecom Express",risk:"Normal"},
+{id:"ORD-1051",customer:"Riya Singh",sku:"SKU-106",product:"Everyday Hoodie",variant:"Navy / M",qty:1,priority:"Priority",status:"Picking",ship:"17:00",courier:"Delhivery",risk:"High"},
+{id:"ORD-1052",customer:"Mohit Verma",sku:"SKU-101",product:"Classic Cotton T-Shirt",variant:"Black / M",qty:1,priority:"Normal",status:"Shipped",ship:"15:00",courier:"BlueDart",risk:"Normal"},
+{id:"ORD-1053",customer:"Isha Gupta",sku:"SKU-107",product:"Travel Backpack",variant:"Black / 28L",qty:1,priority:"Normal",status:"Staged",ship:"18:00",courier:"Ecom Express",risk:"Normal"}
+];
+const inventory=[
+["SKU-101","Classic Cotton T-Shirt",18,12],["SKU-102","Classic Cotton T-Shirt",9,10],["SKU-103","Running Shoes",3,8],["SKU-104","Running Shoes",0,6],["SKU-105","Everyday Hoodie",7,4],["SKU-106","Everyday Hoodie",2,9],["SKU-107","Travel Backpack",11,5],["SKU-108","Sports Cap",22,0],["SKU-109","Slim Fit Jeans",4,7],["SKU-110","Casual Sneakers",6,3]
+];
+const issues=[
+["ISS-201","ORD-1045","Stock unavailable in main warehouse","High","Warehouse","Open","Transfer SKU-104"],
+["ISS-202","ORD-1051","Priority order approaching ship deadline","High","Operations","Open","Complete picking"],
+["ISS-203","ORD-1044","Packed box waiting in staging","Medium","Warehouse","Open","Confirm pickup"],
+["ISS-204","ORD-1049","Variant verification required","High","Packing","Investigating","Verify White / 9"],
+["ISS-205","ORD-1038","Courier missed previous pickup","High","Operations","Resolved","Pickup rebooked"]
+];
+const shipments=[
+["SHP-501","ORD-1044","BX-221","Delhivery","ST-A03","16:30","Ready for Pickup"],
+["SHP-502","ORD-1053","BX-222","Ecom Express","ST-A04","18:00","Ready for Pickup"],
+["SHP-503","ORD-1043","BX-223","BlueDart","ST-B01","18:00","Packed"],
+["SHP-504","ORD-1049","BX-224","BlueDart","ST-B02","16:30","Packed"]
+];
+
+function tag(text){
+ let c="t-gray"; if(["Priority","High","Open"].includes(text))c="t-red"; if(["Medium","Investigating"].includes(text))c="t-amber"; if(["Normal","Resolved","Shipped"].includes(text))c="t-green"; if(["Picking","Packing","Ready to Pick"].includes(text))c="t-blue"; if(["Staged","Ready for Pickup"].includes(text))c="t-purple";
+ return `<span class="tag ${c}">${text}</span>`;
+}
+function showPage(id,btn){
+ document.querySelectorAll('.page').forEach(x=>x.classList.remove('active')); document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active')); if(btn)btn.classList.add('active');
+ const titles={dashboard:"Operations Dashboard",orders:"Order Queue",inventory:"Inventory Visibility",fulfillment:"Fulfillment Workflow",issues:"Exception Tracker",staging:"Staging & Courier Pickup"};
+ document.getElementById("pageTitle").textContent=titles[id];
+ if(id==="orders")renderOrders(); if(id==="inventory")renderInventory(); if(id==="fulfillment")renderFulfillment(); if(id==="issues")renderIssues(); if(id==="staging")renderStaging();
+}
+function renderOrders(){
+ const q=(document.getElementById("orderSearch").value||"").toLowerCase(), s=document.getElementById("statusFilter").value,p=document.getElementById("priorityFilter").value;
+ const list=orders.filter(o=>(!q||[o.id,o.customer,o.sku,o.product].join(" ").toLowerCase().includes(q))&&(!s||o.status===s)&&(!p||o.priority===p));
+ document.getElementById("orderCount").textContent=list.length+" visible";
+ document.getElementById("ordersBody").innerHTML=list.map(o=>`<tr><td><b>${o.id}</b></td><td>${o.customer}</td><td>${o.product}<br><small>${o.variant} · Qty ${o.qty}</small></td><td>${tag(o.priority)}</td><td>${tag(o.status)}</td><td>${o.ship}</td><td>${o.risk==="High"?tag("High"):"—"}</td><td><button class="btn" onclick="openOrder('${o.id}')">View</button></td></tr>`).join("");
+}
+function renderInventory(){
+ document.getElementById("inventoryBody").innerHTML=inventory.map(x=>{
+  const total=x[2]+x[3], state=x[2]===0?"Transfer required":(x[2]<3?"Low stock":"Available");
+  return `<tr><td><b>${x[0]}</b></td><td>${x[1]}</td><td>${x[2]}</td><td>${x[3]}</td><td><b>${total}</b></td><td>${state==="Transfer required"?tag("High"):state==="Low stock"?tag("Medium"):tag("Available")}</td><td>${state==="Transfer required"?`<button class="btn primary" onclick="toast('Transfer request created for ${x[0]}')">Request Transfer</button>`:"—"}</td></tr>`
+ }).join("");
+}
+function renderFulfillment(){
+ const o=orders[0];
+ document.getElementById("fulfillmentBody").innerHTML=`<div class="filters"><select id="flowOrder" onchange="renderFlowOrder()">${orders.map(x=>`<option value="${x.id}">${x.id} — ${x.product}</option>`).join("")}</select></div><div id="flowContent"></div>`;
+ renderFlowOrder();
+}
+function renderFlowOrder(){
+ const id=document.getElementById("flowOrder").value,o=orders.find(x=>x.id===id)||orders[0];
+ const stages=["Received","Processed","Inventory Check","Picking","Packing","Staging","Shipped"];
+ const idx={Received:0,Processing:1,"Inventory Hold":2,"Ready to Pick":2,Picking:3,Packing:4,Staged:5,Shipped:6}[o.status]??1;
+ document.getElementById("flowContent").innerHTML=`<div class="detail"><div class="detailbox"><h4>${o.id} · ${o.priority} order</h4><div class="detailrow"><span>Customer</span><b>${o.customer}</b></div><div class="detailrow"><span>Product</span><b>${o.product}</b></div><div class="detailrow"><span>Variant</span><b>${o.variant}</b></div><div class="detailrow"><span>Quantity</span><b>${o.qty}</b></div><div class="detailrow"><span>Courier</span><b>${o.courier}</b></div><div class="detailrow"><span>Ship by</span><b>${o.ship}</b></div></div><div class="detailbox"><h4>Current operational action</h4><p style="font-size:12px;line-height:1.6">${o.status==="Inventory Hold"?"Inventory is not available in the main warehouse. Transfer stock before picking.":o.status==="Picking"?"Verify SKU and variant before confirming the pick.":o.status==="Packing"?"Complete packing checklist and attach the correct label.":o.status==="Staged"?"Confirm box location and courier pickup.":o.status==="Shipped"?"Shipment handed to courier.":"Process order and complete inventory check."}</p><button class="btn primary" onclick="toast('Action recorded for ${o.id}')">Record Action</button></div></div><div class="workflow">${stages.map((s,i)=>`<div class="step ${i<idx?'done':''} ${i===idx?'current':''}"><span class="circle">${i<idx?'✓':i+1}</span><label>${s}</label></div>`).join("")}</div><div class="panel" style="margin-top:8px"><div class="panelbody"><b style="font-size:12px">Warehouse checklist</b><div style="margin-top:10px;font-size:11px;line-height:2">☐ Correct SKU verified<br>☐ Correct variant / size verified<br>☐ Quantity confirmed<br>☐ Package sealed<br>☐ Shipping label attached<br>☐ Box moved to assigned staging location</div></div></div>`;
+}
+function renderIssues(){
+ document.getElementById("issuesBody").innerHTML=issues.map(x=>`<tr><td><b>${x[0]}</b></td><td>${x[1]}</td><td>${x[2]}<br><small>${x[6]}</small></td><td>${tag(x[3])}</td><td>${x[4]}</td><td>${tag(x[5])}</td><td>${x[5]!=="Resolved"?`<button class="btn primary" onclick="toast('${x[0]} marked for follow-up')">Update</button>`:"—"}</td></tr>`).join("");
+}
+function renderStaging(){
+ document.getElementById("stagingBody").innerHTML=shipments.map(x=>`<tr><td><b>${x[1]}</b></td><td>${x[2]}</td><td>${x[3]}</td><td><b>${x[4]}</b></td><td>${x[5]}</td><td>${tag(x[6])}</td><td><button class="btn" onclick="toast('${x[2]} pickup status updated')">Confirm</button></td></tr>`).join("");
+}
+function openOrder(id){
+ const o=orders.find(x=>x.id===id); if(!o)return;
+ document.getElementById("modalTitle").textContent=o.id+" · Order details";
+ document.getElementById("modalContent").innerHTML=`<div class="detail"><div class="detailbox"><h4>Order</h4><div class="detailrow"><span>Customer</span><b>${o.customer}</b></div><div class="detailrow"><span>SKU</span><b>${o.sku}</b></div><div class="detailrow"><span>Product</span><b>${o.product}</b></div><div class="detailrow"><span>Variant</span><b>${o.variant}</b></div><div class="detailrow"><span>Quantity</span><b>${o.qty}</b></div></div><div class="detailbox"><h4>Fulfillment</h4><div class="detailrow"><span>Priority</span><b>${tag(o.priority)}</b></div><div class="detailrow"><span>Status</span><b>${tag(o.status)}</b></div><div class="detailrow"><span>Ship by</span><b>${o.ship}</b></div><div class="detailrow"><span>Courier</span><b>${o.courier}</b></div><div class="detailrow"><span>Risk</span><b>${o.risk==="High"?tag("High"):"Normal"}</b></div></div></div><div style="margin-top:16px"><button class="btn primary" onclick="toast('Order ${o.id} action saved');closeModal()">Save operational action</button></div>`;
+ document.getElementById("modal").classList.add("open");
+}
+function closeModal(){document.getElementById("modal").classList.remove("open")}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";setTimeout(()=>t.style.display="none",2200)}
+renderOrders();
+</script>
+</body>
+</html>
